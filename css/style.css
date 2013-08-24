@@ -1,0 +1,232 @@
+body {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+.card__conteiner {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+.card__conteiner:before {
+  content: " ";
+  display: block;
+  clear: both;
+}
+.card {
+  font: 24px Arial;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 150px;
+  height: 200px;
+  margin: -100px 0 0 -75px;
+  border: 1px solid rgba(128, 128, 128, 0.11);
+  position: absolute;
+  background: #fdfdfd;
+  border-radius: 4px;
+  text-align: center;
+  float: left;
+}
+.card[suit="0"],
+.card[suit="1"] {
+  color: #df3838;
+}
+.card[suit="2"],
+.card[suit="3"] {
+  color: black;
+}
+.card.shirt {
+  background-color: #a24848;
+  background-image: -webkit-repeating-linear-gradient(-30deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 60px), -webkit-repeating-linear-gradient(30deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 60px), -webkit-linear-gradient(30deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1)), -webkit-linear-gradient(-30deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1));
+  background-size: 70px 120px;
+}
+.card.shirt > * {
+  display: none;
+}
+.card.shadow:before {
+  content: " ";
+  background: grey;
+  -webkit-transform: rotate(36deg);
+  /* Chrome и Safari */
+
+  -moz-transform: rotate(36deg);
+  /* Mozilla FireFox */
+
+  -o-transform: rotate(36deg);
+  -ms-transform: rotate(36deg);
+  /* Opera */
+
+  transform: rotate(36deg);
+  /* По умолчанию */
+
+  display: block;
+  width: 500px;
+  position: absolute;
+  cursor: default;
+  z-index: -1;
+  background-image: -webkit-linear-gradient(left, #808080, #ffffff);
+  margin: 122px 0 0 26px;
+  height: 249px;
+  opacity: 0.05;
+}
+.card h3 {
+  padding: 5px 0;
+  text-align: center;
+  margin: 0;
+  width: 20%;
+  position: absolute;
+  font-size: 18px;
+}
+.card h3:first-child {
+  top: 0;
+  left: 0;
+}
+.card h3:last-child {
+  bottom: 0;
+  right: 0;
+  -webkit-transform: rotate(180deg);
+  /* Chrome и Safari */
+
+  -moz-transform: rotate(180deg);
+  /* Mozilla FireFox */
+
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  /* Opera */
+
+  transform: rotate(180deg);
+  /* По умолчанию */
+
+}
+.card.m2 .picture div {
+  padding: 24%;
+}
+.card.m3 .picture div {
+  padding: 13%;
+}
+.card.m4 .picture div {
+  padding: 24% 0;
+  width: 50%;
+  float: left;
+}
+.card.m5 .picture div {
+  padding: 24% 0;
+  width: 50%;
+  float: left;
+}
+.card.m5 .picture div:last-child {
+  width: 100%;
+  position: absolute;
+  padding: 59% 0;
+}
+.card.m6 .picture div {
+  padding: 12% 0;
+  width: 50%;
+  float: left;
+}
+.card.m7 .picture div {
+  padding: 12% 0;
+  width: 50%;
+  float: left;
+}
+.card.m7 .picture div:last-child {
+  width: 100%;
+  position: absolute;
+  padding: 32% 0;
+}
+.card.m8 .picture div {
+  padding: 7.5% 0;
+  width: 50%;
+  float: left;
+}
+.card.m9 .picture div {
+  padding: 7.5% 0;
+  width: 50%;
+  float: left;
+}
+.card.m9 .picture div:last-child {
+  width: 100%;
+  position: absolute;
+  padding: 23% 0;
+}
+.card.m10 .picture div {
+  padding: 7.5% 0;
+  width: 50%;
+  float: left;
+}
+.card.m10 .picture div:last-child {
+  width: 100%;
+  position: absolute;
+  padding: 23% 0;
+}
+.card.m10 .picture div:first-child {
+  width: 100%;
+  position: absolute;
+  padding: 23% 0;
+  top: 100px;
+}
+.card.mJ .picture div {
+  padding: 35px;
+}
+.card.mJ .picture div:last-child {
+  padding-top: 0;
+}
+.card.mL .picture div {
+  padding: 35px;
+}
+.card.mL .picture div:last-child {
+  padding-top: 0;
+}
+.card.mK .picture div {
+  padding: 35px;
+}
+.card.mK .picture div:last-child {
+  padding-top: 0;
+}
+.card.mA .picture div {
+  padding: 35px;
+  padding-bottom: 0;
+}
+.card.mA .picture div:last-child {
+  font-size: 103px;
+  padding: 0;
+  margin-top: -13px;
+}
+@media only screen and (max-width: 767px) {
+  
+}
+#Pravila {
+  width: 100%;
+  height: 100%;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX///+nxBvIAAAAAXRSTlOZyTXzhgAAAAtJREFUeF5iAIwBAAACAAEN6SX2AAAAAElFTkSuQmCC") repeat;
+  font-size: 1em;
+  text-align: center;
+  z-index: 8;
+  position: absolute;
+  padding-top: 50px;
+  font-family: Arial, sans-serif;
+  border-bottom: 5px solid #ffffff;
+}
+#Pravila p {
+  margin: 20px 20% 0;
+  color: #333;
+}
+.title {
+  position: absolute;
+  background: url("../img/pyat.png") no-repeat;
+  width: 341px;
+  height: 231px;
+  margin-left: 45%;
+  margin-top: 20px;
+  z-index: -2;
+}

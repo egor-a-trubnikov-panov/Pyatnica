@@ -101,7 +101,7 @@ PYatnica = {
     //      $(".card__conteiner").css("-webkit-filter", "none");
     //    });
 
-    var hod = 0, top = this.display.height / 2, left = this.display.width / 2, stek1 = 0, stek2 = 0, gran = false;
+    var top = this.display.height / 2, left = this.display.width / 2, stek1 = 0, stek2 = 0, gran = false;
     $(".card__conteiner").click(function ()
     {
       if (!gran) {
@@ -109,44 +109,57 @@ PYatnica = {
         console.log("click");
         //      $(PYatnica.player1).removeClass("shadow");
         //      $(PYatnica.player2).removeClass("shadow");
-        $(PYatnica.player1[hod + 1]).addClass("shadow");
-        $(PYatnica.player2[hod + 1]).addClass("shadow");
+        try {
+          $(PYatnica.player1[1]).addClass("shadow");
+          $(PYatnica.player2[1]).addClass("shadow");
+        } catch (e) {
+          console.log(e)
+        }
+        ;
+
         //      $(PYatnica.player1[PYatnica.player1.length]).addClass("shadow");
         //      $(PYatnica.player2[PYatnica.player2.length]).addClass("shadow");
-        stek1 = parseInt($(PYatnica.player1[hod]).animate({"top": top, "left": left}, "slow").removeClass("shirt").attr("val"));
+        stek1 = parseInt($(PYatnica.player1[0]).animate({"top": top, "left": left}, "slow").removeClass("shirt").attr("val"));
         setTimeout(function ()
         {
-          stek2 = parseInt($(PYatnica.player2[hod]).animate({"top": top + 210, "left": left}, "slow").removeClass("shirt").attr("val"));
+          stek2 = parseInt($(PYatnica.player2[0]).animate({"top": top + 210, "left": left}, "slow").removeClass("shirt").attr("val"));
 
         }, 1000);
 
         setTimeout(function ()
         {
           if (stek1 > stek2) {
-            PYatnica.Stek.push(PYatnica.player1[hod], PYatnica.player2[hod]);
+            PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
             $(PYatnica.Stek).animate({"top": "110", "left": "85"}, "slow");
-            PYatnica.player1.splice(hod, 1);
-            PYatnica.player2.splice(hod, 1);
+            PYatnica.player1.splice(0, 1);
+            PYatnica.player2.splice(0, 1);
             for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
-              PYatnica.player1.push(PYatnica.Stek[i]);
-              PYatnica.Stek.splice(i, 1);
+              PYatnica.player1.push(PYatnica.Stek[0]);
+              PYatnica.Stek.splice(0, 1);
+            }
+
+          } else {
+            if (stek2 > stek1) {
+              PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
+              $(PYatnica.Stek).animate({"top": "110", "left": PYatnica.display.width - 85}, "slow");
+              PYatnica.player1.splice(0, 1);
+              PYatnica.player2.splice(0, 1);
+              for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
+                PYatnica.player2.push(PYatnica.Stek[0]);
+                PYatnica.Stek.splice(0, 1);
+              }
+
+            } else {
+
+              PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
+              for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
+                $(PYatnica.Stek[i]).animate({"left": parseInt($(PYatnica.Stek[i]).css("left").substr(0, $(PYatnica.Stek[i]).css("left").length - 2)) - 200}, "slow");
+              }
+
             }
 
           }
 
-          if (stek2 > stek1) {
-            PYatnica.Stek.push(PYatnica.player1[hod], PYatnica.player2[hod]);
-            $(PYatnica.Stek).animate({"top": "110", "left": PYatnica.display.width - 85}, "slow");
-            PYatnica.player1.splice(hod, 1);
-            PYatnica.player2.splice(hod, 1);
-            for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
-              PYatnica.player2.push(PYatnica.Stek[i]);
-              PYatnica.Stek.splice(i, 1);
-            }
-
-          }
-
-          hod++;
           gran = false;
         }, 2000)
 

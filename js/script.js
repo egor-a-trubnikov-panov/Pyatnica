@@ -104,21 +104,27 @@ PYatnica = {
     var top = this.display.height / 2, left = this.display.width / 2, stek1 = 0, stek2 = 0, gran = false;
     $(".card__conteiner").click(function ()
     {
+
+      function shadowControl()
+      {
+        $(PYatnica.player1).removeClass("shadow").addClass("shirt");
+        $(PYatnica.player2).removeClass("shadow").addClass("shirt");
+        $(PYatnica.player1[0]).addClass("shadow");
+        $(PYatnica.player2[0]).addClass("shadow");
+      }
+
       if (!gran) {
         gran = true;
         console.log("click");
-        //      $(PYatnica.player1).removeClass("shadow");
-        //      $(PYatnica.player2).removeClass("shadow");
+
         try {
+          shadowControl();
           $(PYatnica.player1[1]).addClass("shadow");
           $(PYatnica.player2[1]).addClass("shadow");
         } catch (e) {
           console.log(e)
         }
-        ;
 
-        //      $(PYatnica.player1[PYatnica.player1.length]).addClass("shadow");
-        //      $(PYatnica.player2[PYatnica.player2.length]).addClass("shadow");
         stek1 = parseInt($(PYatnica.player1[0]).animate({"top": top, "left": left}, "slow").removeClass("shirt").attr("val"));
         setTimeout(function ()
         {
@@ -130,7 +136,10 @@ PYatnica = {
         {
           if (stek1 > stek2) {
             PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
-            $(PYatnica.Stek).animate({"top": "110", "left": "85"}, "slow");
+            $(PYatnica.Stek).animate({"top": "110", "left": "85"}, "slow", function ()
+            {
+              shadowControl();
+            });
             PYatnica.player1.splice(0, 1);
             PYatnica.player2.splice(0, 1);
             for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
@@ -141,7 +150,10 @@ PYatnica = {
           } else {
             if (stek2 > stek1) {
               PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
-              $(PYatnica.Stek).animate({"top": "110", "left": PYatnica.display.width - 85}, "slow");
+              $(PYatnica.Stek).animate({"top": "110", "left": PYatnica.display.width - 85}, "slow", function ()
+              {
+                shadowControl();
+              });
               PYatnica.player1.splice(0, 1);
               PYatnica.player2.splice(0, 1);
               for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {

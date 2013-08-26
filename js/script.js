@@ -164,6 +164,8 @@ PYatnica = {
             } else {
 
               PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
+              PYatnica.player1.splice(0, 1);
+              PYatnica.player2.splice(0, 1);
               for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
                 $(PYatnica.Stek[i]).animate({"left": parseInt($(PYatnica.Stek[i]).css("left").substr(0, $(PYatnica.Stek[i]).css("left").length - 2)) - 200}, "slow");
               }

@@ -101,9 +101,27 @@ PYatnica = {
     //      $(".card__conteiner").css("-webkit-filter", "none");
     //    });
 
-    var top = this.display.height / 2, left = this.display.width / 2, stek1 = 0, stek2 = 0, gran = false;
+    var top = this.display.height / 2, left = this.display.width / 2, stek1 = 0, stek2 = 0, gran = false, voina = false;
     $(".card__conteiner").click(function ()
     {
+      function animation(voina)
+      {
+
+        if (voina) {
+          stek1 = parseInt($(PYatnica.player1[0]).animate({"top": top, "left": left}, "slow").addClass("shirt").attr("val"));
+        } else {
+          stek1 = parseInt($(PYatnica.player1[0]).animate({"top": top, "left": left}, "slow").removeClass("shirt").attr("val"));
+        }
+        setTimeout(function ()
+        {
+          if (voina) {
+            stek2 = parseInt($(PYatnica.player2[0]).animate({"top": top + 210, "left": left}, "slow").addClass("shirt").attr("val"));
+          } else {
+            stek2 = parseInt($(PYatnica.player2[0]).animate({"top": top + 210, "left": left}, "slow").removeClass("shirt").attr("val"));
+          }
+
+        }, 1000);
+      }
 
       function shadowControl()
       {
@@ -113,69 +131,86 @@ PYatnica = {
         $(PYatnica.player2[0]).addClass("shadow");
       }
 
+      function offset()
+      {
+        for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
+          $(PYatnica.Stek[i]).animate({"left": parseInt($(PYatnica.Stek[i]).css("left").substr(0, $(PYatnica.Stek[i]).css("left").length - 2)) - 200}, "slow", function ()
+          {
+            gran = false;
+          });
+        }
+      }
+
       if (!gran) {
         gran = true;
-        console.log("click");
 
-        try {
+        if (voina) {
           shadowControl();
-          $(PYatnica.player1[1]).addClass("shadow");
-          $(PYatnica.player2[1]).addClass("shadow");
-        } catch (e) {
-          console.log(e)
-        }
+          animation(voina);
 
-        stek1 = parseInt($(PYatnica.player1[0]).animate({"top": top, "left": left}, "slow").removeClass("shirt").attr("val"));
-        setTimeout(function ()
-        {
-          stek2 = parseInt($(PYatnica.player2[0]).animate({"top": top + 210, "left": left}, "slow").removeClass("shirt").attr("val"));
-
-        }, 1000);
-
-        setTimeout(function ()
-        {
-          if (stek1 > stek2) {
+          setTimeout(function ()
+          {
             PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
-            $(PYatnica.Stek).animate({"top": "110", "left": "85"}, "slow", function ()
-            {
-              shadowControl();
-            });
             PYatnica.player1.splice(0, 1);
             PYatnica.player2.splice(0, 1);
-            for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
-              PYatnica.player1.push(PYatnica.Stek[0]);
-              PYatnica.Stek.splice(0, 1);
-            }
+            gran = false;
+            offset();
+          }, 2000);
+          voina = false;
+        } else {
+          try {
+            shadowControl();
+            $(PYatnica.player1[1]).addClass("shadow");
+            $(PYatnica.player2[1]).addClass("shadow");
+          } catch (e) {
+            console.log(e)
+          }
+          animation(voina);
 
-          } else {
-            if (stek2 > stek1) {
+          setTimeout(function ()
+          {
+            if (stek1 > stek2) {
               PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
-              $(PYatnica.Stek).animate({"top": "110", "left": PYatnica.display.width - 85}, "slow", function ()
+              $(PYatnica.Stek).animate({"top": "110", "left": "85"}, "slow", function ()
               {
                 shadowControl();
+                gran = false;
               });
               PYatnica.player1.splice(0, 1);
               PYatnica.player2.splice(0, 1);
               for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
-                PYatnica.player2.push(PYatnica.Stek[0]);
+                PYatnica.player1.push(PYatnica.Stek[0]);
                 PYatnica.Stek.splice(0, 1);
               }
 
             } else {
+              if (stek2 > stek1) {
+                PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
+                $(PYatnica.Stek).animate({"top": "110", "left": PYatnica.display.width - 85}, "slow", function ()
+                {
+                  shadowControl();
+                  gran = false;
+                });
+                PYatnica.player1.splice(0, 1);
+                PYatnica.player2.splice(0, 1);
+                for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
+                  PYatnica.player2.push(PYatnica.Stek[0]);
+                  PYatnica.Stek.splice(0, 1);
+                }
 
-              PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
-              PYatnica.player1.splice(0, 1);
-              PYatnica.player2.splice(0, 1);
-              for (var i = 0, l = PYatnica.Stek.length; i < l; i++) {
-                $(PYatnica.Stek[i]).animate({"left": parseInt($(PYatnica.Stek[i]).css("left").substr(0, $(PYatnica.Stek[i]).css("left").length - 2)) - 200}, "slow");
+              } else {
+                voina = true;
+                PYatnica.Stek.push(PYatnica.player1[0], PYatnica.player2[0]);
+                PYatnica.player1.splice(0, 1);
+                PYatnica.player2.splice(0, 1);
+                offset();
               }
 
             }
 
-          }
+          }, 2000)
 
-          gran = false;
-        }, 2000)
+        }
 
       }
 

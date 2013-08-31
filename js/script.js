@@ -9,6 +9,14 @@ PYatnica = {
     width: document.width,
     height: document.height
   },
+  P1: [],
+  P2: [],
+  count: function ()
+  {
+    console.log(this.P1.text());
+    this.P1.text(PYatnica.player1.length);
+    this.P2.text(PYatnica.player2.length);
+  },
   Stek: [],
   render: function ()
   {
@@ -39,6 +47,9 @@ PYatnica = {
   kard: [], player1: [], player2: [],
   sort: function ()
   {
+    this.P1 = $("#player1 span");
+    this.P2 = $("#player2 span");
+
     this.kard = $(".card");
     var leng_th = this.kard.length, R = 0;
 
@@ -88,7 +99,7 @@ PYatnica = {
         clearInterval(tusovka);
 
       }
-
+      PYatnica.count();
     }, 50);///500
 
   },
@@ -155,7 +166,9 @@ PYatnica = {
             PYatnica.player2.splice(0, 1);
             gran = false;
             offset();
+            PYatnica.count();
           }, 2000);
+
           voina = false;
         } else {
           try {
@@ -166,7 +179,7 @@ PYatnica = {
             console.log(e)
           }
           animation(voina);
-
+          PYatnica.count();
           setTimeout(function ()
           {
             if (stek1 > stek2) {
@@ -182,6 +195,7 @@ PYatnica = {
                 PYatnica.player1.push(PYatnica.Stek[0]);
                 PYatnica.Stek.splice(0, 1);
               }
+              PYatnica.count();
 
             } else {
               if (stek2 > stek1) {
@@ -197,6 +211,7 @@ PYatnica = {
                   PYatnica.player2.push(PYatnica.Stek[0]);
                   PYatnica.Stek.splice(0, 1);
                 }
+                PYatnica.count();
 
               } else {
                 voina = true;
@@ -204,6 +219,7 @@ PYatnica = {
                 PYatnica.player1.splice(0, 1);
                 PYatnica.player2.splice(0, 1);
                 offset();
+                PYatnica.count();
               }
 
             }
